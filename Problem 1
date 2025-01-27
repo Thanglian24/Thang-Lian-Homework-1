@@ -1,0 +1,68 @@
+import random as rnd
+
+# region function declarations
+def main():
+    """
+    This function rolls a fair die 1000 times and tallies the number of 1's, 2's etc. Finally,
+    it calculates and outputs the probability of each possible score.
+    :return: nothing
+    """
+    scores = [0] * 6  # create a list with 6 elements/items initialized to 0's
+    n = 1000  # how many times to roll the die
+    for i in range(n):  # each time through the loop, roll die and increment a score
+        score = rnd.randint(1, 6)  # score = 1 to 6 (fair die roll)
+        scores[score - 1] += 1  # increment score-1 item b/c 0 indexing start
+
+    # print the result
+    for i in range(6):
+        print(f"Score {i+1}: {scores[i]} occurrences, Probability: {scores[i] / n:.4f}")
+
+
+def main2():
+    """
+    This function rolls a fair die 10000 times and tallys the number of 1's, 2's etc. Finally,
+    it calculates and outputs the probability of each possible score.
+    :return: nothing
+    """
+    scores = [0] * 6  # create a list with 6 elements/items initialized to 0's
+    n = 10000  # how many times to roll the die
+    for i in range(n):  # each time through the loop, roll die and increment a score
+        score = rnd.randint(1, 6)  # score = 1 to 6 (fair die roll)
+        scores[score - 1] += 1  # increment score-1 item b/c 0 indexing start
+
+    # print the result
+    print(f"\nAfter {n} rolls of a fair die:")
+    for i in range(6):
+        print(f"Score {i+1}: {scores[i]} occurrences, Probability: {scores[i] / n:.4f}")
+
+
+def main3():
+    """
+    This function rolls an unfair die 10000 times and tallys the number of 1's, 2's etc. Finally,
+    it calculates and outputs the probability of each possible score.
+    :return: nothing
+    """
+    scores = [0] * 6  # create a list with 6 elements/items initialized to 0's
+    n = 10000  # how many times to roll the die
+
+    # Define the unfair die (non-uniform probabilities)
+    def unfair_roll():
+        # Skewing probabilities: higher numbers have higher chances of being rolled
+        return rnd.choices([1, 2, 3, 4, 5, 6], [0.05, 0.1, 0.2, 0.25, 0.25, 0.15])[0]
+
+    for i in range(n):  # each time through the loop, roll the unfair die and increment a score
+        score = unfair_roll()  # score = 1 to 6 (unfair die roll)
+        scores[score - 1] += 1  # increment score-1 item b/c 0 indexing start
+
+    # print the result
+    print(f"\nAfter {n} rolls of an unfair die:")
+    for i in range(6):
+        print(f"Score {i+1}: {scores[i]} occurrences, Probability: {scores[i] / n:.4f}")
+
+# endregion
+
+# this if statement prevents these calls if this file is imported as a module.
+if __name__ == "__main__":
+    main()
+    main2()
+    main3()
